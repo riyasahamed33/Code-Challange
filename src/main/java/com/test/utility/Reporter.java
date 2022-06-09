@@ -1,8 +1,15 @@
 package com.test.utility;
 
+
+/**
+ * In Reporter class we are having different extent report methods which is used to generate the html report
+ /*
+ * 
+ * @author Riyaz Ahamed
+ *
+ */
 import java.io.IOException;
 
-import com.aventstack.extentreports.AnalysisStrategy;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.MediaEntityBuilder;

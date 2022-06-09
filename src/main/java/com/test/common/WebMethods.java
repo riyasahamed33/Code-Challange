@@ -1,5 +1,16 @@
+
+
 package com.test.common;
 
+/**
+ *WebMethods interface is an entry point to the application,contains only method declartion. 
+ *
+ */
+
+/**
+ * @author Riyaz Ahamed
+ *
+ */
 
 import java.net.MalformedURLException;
 
@@ -53,120 +64,7 @@ public interface WebMethods {
 		 */
 		public void click(WebElement ele);
 
-		/**
-		 * This method will get the text of the element
-		 * @param ele   - The Webelement (button/link/element) in which text to be retrieved
-		 * @author Riyaz Ahamed
-		 */
-		public String getText(WebElement ele);
-
-		/**
-		 * This method will select the drop down visible text
-		 * @param ele   - The Webelement (dropdown) to be selected
-		 * @param value The value to be selected (visibletext) from the dropdown 
-		 * @author Riyaz Ahamed
-		 */
-		public void selectDropDownUsingText(WebElement ele, String value) ;
 		
-		/**
-		 * This method will select the drop down using index
-		 * @param ele   - The Webelement (dropdown) to be selected
-		 * @param index The index to be selected from the dropdown 
-		 * @author Riyaz Ahamed
-		 */
-		public void selectDropDownUsingIndex(WebElement ele, int index) ;
-
-		/**
-		 * This method will verify browser actual title with expected
-		 * @param title - The expected title of the browser
-		 * @author Riyaz Ahamed
-		 */
-		public boolean verifyTitle(String expectedTitle);
-		
-		/**
-		 * This method will verify exact given text with actual text on the given element
-		 * @param ele   - The Webelement in which the text to be need to be verified
-		 * @param expectedText  - The expected text to be verified
-		 * @author Riyaz Ahamed
-		 */
-		public void verifyExactText(WebElement ele, String expectedText);
-		
-		/**
-		 * This method will verify given text contains actual text on the given element
-		 * @param ele   - The Webelement in which the text to be need to be verified
-		 * @param expectedText  - The expected text to be verified
-		 * @author Riyaz Ahamed
-		 */
-		public void verifyPartialText(WebElement ele, String expectedText);
-
-		/**
-		 * This method will verify exact given attribute's value with actual value on the given element
-		 * @param ele   - The Webelement in which the attribute value to be need to be verified
-		 * @param attribute  - The attribute to be checked (like value, href etc)
-		 * @param value  - The value of the attribute
-		 * @author Riyaz Ahamed
-		 */
-		public void verifyExactAttribute(WebElement ele, String attribute, String value);
-		
-		/**
-		 * This method will verify partial given attribute's value with actual value on the given element
-		 * @param ele   - The Webelement in which the attribute value to be need to be verified
-		 * @param attribute  - The attribute to be checked (like value, href etc)
-		 * @param value  - The value of the attribute
-		 * @author Riyaz Ahamed
-		 */
-		public void verifyPartialAttribute(WebElement ele, String attribute, String value);
-	
-		/**
-		 * This method will verify if the element (Radio button, Checkbox)  is selected
-		 * @param ele   - The Webelement (Radio button, Checkbox) to be verified
-		 * @author Riyaz Ahamed
-		 */
-		public void verifySelected(WebElement ele);
-		
-		/**
-		 * This method will verify if the element is visible in the DOM
-		 * @param ele   - The Webelement to be checked
-		 * @author Riyaz Ahamed
-		 */
-		public void verifyDisplayed(WebElement ele);
-		
-		/**
-		 * This method will switch to the Window of interest
-		 * @param index The window index to be switched to. 0 -> first window 
-		 * @author Riyaz Ahamed
-		 */
-		public void switchToWindow(int index);
-		
-		/**
-		 * This method will switch to the specific frame
-		 * @param ele   - The Webelement (frame) to be switched
-		 * @author Riyaz Ahamed
-		 */
-		public void switchToFrame(WebElement ele);
-		
-		/**
-		 * This method will accept the alert opened
-		 * @author Riyaz Ahamed
-		 */
-		public void acceptAlert();
-		
-		/**
-		 * This method will dismiss the alert opened
-		 * @author Riyaz Ahamed
-		 */
-		public void dismissAlert();
-		
-		/**
-		 * This method will return the text of the alert
-		 * @author Riyaz Ahamed
-		 */
-		public String getAlertText();
-		
-		/**
-		 * This method will take snapshot of the browser
-		 * @author Riyaz Ahamed
-		 */
 		public long takeSnap();
 			
 		/**

@@ -1,5 +1,13 @@
 package com.test.common;
 
+/**
+ * Webui Action class - Providing Implementation to the interface class 
+ *
+ *
+/**
+ * @author Riyaz Ahamed
+ *
+ */
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -13,6 +21,8 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.InvalidElementStateException;
@@ -30,21 +40,31 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
 
 import com.test.utility.*;
 
+/**
+ * @author Dell
+ *
+ */
 public class WebUiActions extends Reporter implements WebMethods {
+	
 
 	public static RemoteWebDriver driver;
 	public String sUrl, sHubUrl, sHubPort, sbrowser;
 	public Properties prop;
-
+	public static Logger log  = LogManager.getLogger(WebUiActions.class.getName());
+	
+	
 	public WebUiActions() {
 		prop = new Properties();
 		try {
-			prop.load(new FileInputStream(new File("./resources/config.properties")));
+			/*
+			 * Steps to read the value from the properties file
+			 */
+			prop.load(new FileInputStream(new File("./src/main/resources/config.properties")));
 			sHubUrl = prop.getProperty("HUB");
 			sHubPort = prop.getProperty("PORT");
 			sUrl = prop.getProperty("URL");
@@ -56,6 +76,12 @@ public class WebUiActions extends Reporter implements WebMethods {
 			e.printStackTrace();
 		}
 	}
+	
+	/*
+	 * start app method to launch the browser
+	 * @param browser
+	 * @param remote
+	 */
 
 	public void startApp(String browser, boolean bRemote) {
 		try {
@@ -70,19 +96,21 @@ public class WebUiActions extends Reporter implements WebMethods {
 				}
 			else { // this is for local run
 				if (sbrowser.equalsIgnoreCase("chrome")) {
-					System.out.println("Browser launch method");
+					log.info("chrome Browser launch method");
 					System.setProperty("webdriver.chrome.driver", "./drivers/chromedriver.exe");
-					driver = new ChromeDriver();
+					driver = new ChromeDriver(); //launch Chrome 
 				} else {
 					System.setProperty("webdriver.gecko.driver", "./drivers/geckodriver.exe");
 					driver = new FirefoxDriver();
 				}
 			}
-			driver.manage().window().maximize();
-			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-			driver.get(sUrl);
+			driver.manage().window().maximize(); //maximize browser window
+			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS); //static wait
+			driver.get(sUrl);//enter url
+			log.info("Browser launched successfully");
 			reportStep("The browser: " + sbrowser + " launched successfully", "PASS");
 		} catch (WebDriverException e) {
+			log.info("Browser could not lauched");
 			reportStep("The browser: " + sbrowser + " could not be launched", "FAIL");
 		}
 	}
@@ -146,6 +174,9 @@ public class WebUiActions extends Reporter implements WebMethods {
 			reportStep("Unknown exception occured while clicking in the field :", "FAIL");
 		}
 	}
+	/*
+	 * To Retrieve the text from the Webpage 
+	 */
 
 	public String getText(WebElement ele) {
 		String bReturn = "";
@@ -157,6 +188,9 @@ public class WebUiActions extends Reporter implements WebMethods {
 		return bReturn;
 	}
 
+	/*
+	 * To get the title of the browser window
+	 */
 	public String getTitle() {
 		String bReturn = "";
 		try {
@@ -166,36 +200,7 @@ public class WebUiActions extends Reporter implements WebMethods {
 		}
 		return bReturn;
 	}
-
-	public String getAttribute(WebElement ele, String attribute) {
-		String bReturn = "";
-		try {
-			bReturn = ele.getAttribute(attribute);
-		} catch (WebDriverException e) {
-			reportStep("The element: " + ele + " could not be found.", "FAIL");
-		}
-		return bReturn;
-	}
-
-	public void selectDropDownUsingText(WebElement ele, String value) {
-		try {
-			new Select(ele).selectByVisibleText(value);
-			reportStep("The dropdown is selected with text " + value, "PASS");
-		} catch (WebDriverException e) {
-			reportStep("The element: " + ele + " could not be found.", "FAIL");
-		}
-
-	}
-
-	public void selectDropDownUsingIndex(WebElement ele, int index) {
-		try {
-			new Select(ele).selectByIndex(index);
-			reportStep("The dropdown is selected with index " + index, "PASS");
-		} catch (WebDriverException e) {
-			reportStep("The element: " + ele + " could not be found.", "FAIL");
-		}
-
-	}
+	
 
 	public boolean verifyTitle(String title) {
 		boolean bReturn = false;
@@ -238,33 +243,7 @@ public class WebUiActions extends Reporter implements WebMethods {
 		}
 	}
 
-	public void verifyExactAttribute(WebElement ele, String attribute, String value) {
-		try {
-			if (getAttribute(ele, attribute).equals(value)) {
-				reportStep("The expected attribute :" + attribute + " value matches the actual " + value, "PASS");
-			} else {
-				reportStep("The expected attribute :" + attribute + " value does not matches the actual " + value,
-						"FAIL");
-			}
-		} catch (WebDriverException e) {
-			reportStep("Unknown exception occured while verifying the Attribute Text", "FAIL");
-		}
-
-	}
-
-	public void verifyPartialAttribute(WebElement ele, String attribute, String value) {
-		try {
-			if (getAttribute(ele, attribute).contains(value)) {
-				reportStep("The expected attribute :" + attribute + " value contains the actual " + value, "PASS");
-			} else {
-				reportStep("The expected attribute :" + attribute + " value does not contains the actual " + value,
-						"FAIL");
-			}
-		} catch (WebDriverException e) {
-			reportStep("Unknown exception occured while verifying the Attribute Text", "FAIL");
-		}
-	}
-
+	
 	public void verifySelected(WebElement ele) {
 		try {
 			if (ele.isSelected()) {
@@ -354,7 +333,8 @@ public class WebUiActions extends Reporter implements WebMethods {
 		}
 		return text;
 	}
-
+    
+	
 	/**
 	 * takeSnap method is used to capture the screenshot
 	 */

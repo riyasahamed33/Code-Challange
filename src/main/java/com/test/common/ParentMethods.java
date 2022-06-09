@@ -1,6 +1,15 @@
+
 package com.test.common;
 
+/**
+ * @author Riyaz Ahamed
+ *
+ */
 
+/**
+ * In Parent methods class we are having different testng annotations and it will specify which method need to run before and after methods
+ *
+ */
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.AfterTest;
@@ -13,7 +22,7 @@ public class ParentMethods extends WebUiActions{
 
 	public String browserName;
 	public String dataSheetName;
-
+	 
 	@BeforeSuite
 	public void beforeSuite(){
 		startResult();
@@ -36,6 +45,7 @@ public class ParentMethods extends WebUiActions{
 
 	@AfterSuite
 	public void afterSuite(){
+		
 		endResult();
 	}
 
@@ -45,7 +55,7 @@ public class ParentMethods extends WebUiActions{
 
 	@AfterMethod
 	public void afterMethod(){
-		//closeAllBrowsers();
+		closeAllBrowsers();
 
 	}
 }

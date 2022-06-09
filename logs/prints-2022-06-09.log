@@ -1,0 +1,5 @@
+17:09:12.846 [TestNG-test=Test-1] INFO  com.test.common.WebUiActions - chrome Browser launch method
+17:09:29.361 [TestNG-test=Test-1] INFO  com.test.common.WebUiActions - Browser launched successfully
+17:14:58.627 [TestNG-test=Test-1] INFO  com.test.common.WebUiActions - chrome Browser launch method
+17:15:02.905 [TestNG-test=Test-1] INFO  com.test.common.WebUiActions - Browser launched successfully
+17:22:35.091 [TestNG-test=Test-1] INFO  com.test.common.WebUiActions - chrome Browser launch method
