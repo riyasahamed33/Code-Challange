@@ -1,6 +1,6 @@
 # Code-Challange - Amazon application
 
-Many features to building and facility automation tests using Page Object Pattern.
+Developed the automation framework using Page Object model.
 
 Process to follow:
 
